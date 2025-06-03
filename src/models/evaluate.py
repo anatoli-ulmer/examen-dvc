@@ -57,7 +57,7 @@ def main():
         json.dump(scores, f, indent=4)
     
     # save predictions
-    output_filepath = os.path.join(data_path, f'y_pred.csv')
+    output_filepath = os.path.join(data_path, f'predictions.csv')
     df_y_pred = pd.DataFrame(y_pred, columns=['predicted_silica_concentrate'])
     df_y_pred.to_csv(output_filepath, index=False)
     
