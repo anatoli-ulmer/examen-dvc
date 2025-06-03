@@ -1,6 +1,6 @@
 /venv
 /clean_data.csv
-
+playground.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
