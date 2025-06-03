@@ -8,6 +8,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 import joblib
 import os
+import json
 
 RANDOM_STATE = 42
 
@@ -52,7 +53,8 @@ def main():
               'R2': r2}
     
     # save metrics
-    joblib.dump(scores, 'metrics/scores.json')
+    with open('metrics/scores.json', "w") as f:
+        json.dump(scores, f, indent=4)
     
     # save predictions
     output_filepath = os.path.join(data_path, f'y_pred.csv')
