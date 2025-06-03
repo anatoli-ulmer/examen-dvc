@@ -6,6 +6,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 import joblib
 import os
+import yaml
 
 RANDOM_STATE = 42
 
@@ -43,13 +44,11 @@ def main():
     
     X_train, X_test, y_train, y_test = read_data(data_path)
     
-    param_grid = {
-        "n_estimators": [25, 50, 100, 200],
-        "learning_rate": [0.01, 0.33, 0.1],
-        "max_depth": [3, 5],
-        "min_samples_split": [2, 5],
-        # "min_samples_leaf": [1, 3]
-    }
+    # read parameter space
+    with open("params.yaml", "r") as f:
+        config = yaml.safe_load(f)
+    
+    param_grid = config["gridsearch"]
     
     grid_search = run_grid_search(param_grid, X_train, y_train)
     

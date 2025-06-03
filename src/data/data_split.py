@@ -5,9 +5,7 @@ from pathlib import Path
 import logging
 from sklearn.model_selection import train_test_split
 import os
-
-
-RANDOM_STATE = 42
+import yaml
 
 
 def main():
@@ -38,9 +36,15 @@ def process_data(input_filepath, output_folderpath):
     # Extract target and features
     target = df['silica_concentrate']
     feats = df.drop(['silica_concentrate'], axis=1)
+    
+    # read parameters
+    with open("params.yaml", "r") as f:
+        config = yaml.safe_load(f)
 
     # Split data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(feats, target, test_size=0.2, random_state=RANDOM_STATE)
+    X_train, X_test, y_train, y_test = train_test_split(feats, target, 
+                                                        test_size=config['split']['test_size'], 
+                                                        random_state=config['split']['random_state'])
 
     # Save dataframes to their respective output file paths
     save_dataframes(X_train, X_test, y_train, y_test, output_folderpath)
