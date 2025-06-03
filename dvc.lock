@@ -72,6 +72,10 @@ stages:
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
       size: 25951
+    - path: params.yaml
+      hash: md5
+      md5: 4e3885e71583aed8d397efe99c972e20
+      size: 191
     - path: src/models/gridsearch.py
       hash: md5
       md5: fec91744790d5d6e6e704d3527e6f9da

@@ -25,6 +25,7 @@ stages:
   gridsearch:
     cmd: python src/models/gridsearch.py
     deps:
+    - params.yaml
     - data/processed/X_train_scaled.csv
     - data/processed/y_train.csv
     - src/models/gridsearch.py
