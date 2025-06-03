@@ -8,10 +8,18 @@ stages:
       md5: 41dee78430cbebe25be9986bbb599d4a.dir
       size: 333757
       nfiles: 1
+    - path: params.yaml
+      hash: md5
+      md5: 4e3885e71583aed8d397efe99c972e20
+      size: 191
     - path: src/data/data_split.py
       hash: md5
-      md5: a25597ac3a0caf375998e38a55e1ad03
-      size: 2066
+      md5: 61a14a6e2e95f758c4da4f4efb5e8d7b
+      size: 2318
+    params:
+      params.yaml:
+        split.random_state: 42
+        split.test_size: 0.2
     outs:
     - path: data/processed/X_test.csv
       hash: md5
@@ -74,13 +82,30 @@ stages:
       size: 25951
     - path: src/models/gridsearch.py
       hash: md5
-      md5: 3cba7b3ea94ae29aa26116b5b4192ecd
-      size: 1938
+      md5: 1f59a6f9a29ccc5e4c31eaa8d341bcf7
+      size: 1879
+    params:
+      params.yaml:
+        gridsearch.learning_rate:
+        - 0.01
+        - 0.033
+        - 0.1
+        gridsearch.max_depth:
+        - 3
+        gridsearch.min_samples_leaf:
+        - 1
+        gridsearch.min_samples_split:
+        - 2
+        gridsearch.n_estimators:
+        - 25
+        - 50
+        - 100
+        - 200
     outs:
     - path: models/best_params.pkl
       hash: md5
-      md5: feebf5c6a7285215204d5ef267c0b54e
-      size: 72
+      md5: 6587d47b1744dc4c205318c6cc85d115
+      size: 115
   training:
     cmd: python src/models/training.py
     deps:
@@ -102,8 +127,8 @@ stages:
       size: 25951
     - path: models/best_params.pkl
       hash: md5
-      md5: feebf5c6a7285215204d5ef267c0b54e
-      size: 72
+      md5: 6587d47b1744dc4c205318c6cc85d115
+      size: 115
     - path: src/models/training.py
       hash: md5
       md5: 479e65da268b0ea6a2d543fb5e123297
@@ -111,8 +136,8 @@ stages:
     outs:
     - path: models/gbr_model.pkl
       hash: md5
-      md5: 6b9d6a3ddee9010cd6fd0aef6f6af830
-      size: 145612
+      md5: 9996e46ea7fdf856915533decbb73570
+      size: 97468
   evaluate:
     cmd: python src/models/evaluate.py
     deps:
@@ -134,8 +159,8 @@ stages:
       size: 25951
     - path: models/gbr_model.pkl
       hash: md5
-      md5: 6b9d6a3ddee9010cd6fd0aef6f6af830
-      size: 145612
+      md5: 9996e46ea7fdf856915533decbb73570
+      size: 97468
     - path: src/models/evaluate.py
       hash: md5
       md5: 78633f818ca3570fcf5efc249695b471
@@ -143,9 +168,9 @@ stages:
     outs:
     - path: data/processed/predictions.csv
       hash: md5
-      md5: 40c5c8ff3e01d1faf793b4afacf5d892
-      size: 6787
+      md5: 97b332cc47bd516ba6c87ec254417658
+      size: 6786
     - path: metrics/scores.json
       hash: md5
-      md5: 4e94aa6e7ffcfdab6a588adc4d6922a6
-      size: 63
+      md5: e7d412211d12d2abd5a744e46f0ff19f
+      size: 64
