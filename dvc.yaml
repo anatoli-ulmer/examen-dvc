@@ -16,6 +16,7 @@ stages:
   normalize:
     cmd: python src/data/normalize.py
     deps:
+    - params.yaml
     - data/processed/X_test.csv
     - data/processed/X_train.csv
     - src/data/normalize.py
