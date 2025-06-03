@@ -10,8 +10,8 @@ stages:
       nfiles: 1
     - path: params.yaml
       hash: md5
-      md5: f4274fb810e933c634b7053aa482dd57
-      size: 194
+      md5: 4e3885e71583aed8d397efe99c972e20
+      size: 191
     - path: src/data/data_split.py
       hash: md5
       md5: 61a14a6e2e95f758c4da4f4efb5e8d7b
@@ -74,8 +74,8 @@ stages:
       size: 25951
     - path: src/models/gridsearch.py
       hash: md5
-      md5: 7db98ae0b21d53cfe6b3b574abc6398e
-      size: 1641
+      md5: fec91744790d5d6e6e704d3527e6f9da
+      size: 1502
     params:
       params.yaml:
         gridsearch.learning_rate:
@@ -84,7 +84,6 @@ stages:
         - 0.1
         gridsearch.max_depth:
         - 3
-        - 5
         gridsearch.min_samples_leaf:
         - 1
         gridsearch.min_samples_split:
@@ -97,40 +96,32 @@ stages:
     outs:
     - path: models/best_params.pkl
       hash: md5
-      md5: 383957f130898375ed2d9c249af1a94c
+      md5: 6587d47b1744dc4c205318c6cc85d115
       size: 115
   training:
     cmd: python src/models/training.py
     deps:
-    - path: data/processed/X_test_scaled.csv
-      hash: md5
-      md5: 28af5cf6680e5aa9a5a2c92143c3d77e
-      size: 55866
     - path: data/processed/X_train_scaled.csv
       hash: md5
       md5: c31e10c6bd74233879ba71cdf3a64c83
       size: 222224
-    - path: data/processed/y_test.csv
-      hash: md5
-      md5: a051d29629c8bbb4cfb7e85c7f0315da
-      size: 6456
     - path: data/processed/y_train.csv
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
       size: 25951
     - path: models/best_params.pkl
       hash: md5
-      md5: 383957f130898375ed2d9c249af1a94c
+      md5: 6587d47b1744dc4c205318c6cc85d115
       size: 115
     - path: src/models/training.py
       hash: md5
-      md5: 479e65da268b0ea6a2d543fb5e123297
-      size: 1314
+      md5: 956a06cf6c1fffc60fedafbe53986883
+      size: 1158
     outs:
     - path: models/gbr_model.pkl
       hash: md5
-      md5: 6f1df91ff8ce7f6d44068d96b1475640
-      size: 537596
+      md5: 9996e46ea7fdf856915533decbb73570
+      size: 97468
   evaluate:
     cmd: python src/models/evaluate.py
     deps:
@@ -152,8 +143,8 @@ stages:
       size: 25951
     - path: models/gbr_model.pkl
       hash: md5
-      md5: 6f1df91ff8ce7f6d44068d96b1475640
-      size: 537596
+      md5: 9996e46ea7fdf856915533decbb73570
+      size: 97468
     - path: src/models/evaluate.py
       hash: md5
       md5: 78633f818ca3570fcf5efc249695b471
@@ -161,9 +152,9 @@ stages:
     outs:
     - path: data/processed/predictions.csv
       hash: md5
-      md5: 9ba010aaf3f17cfbf4fc1f6125e680e9
-      size: 6789
+      md5: 97b332cc47bd516ba6c87ec254417658
+      size: 6786
     - path: metrics/scores.json
       hash: md5
-      md5: 5c31ae6d126b812fed0e2760e6e5e42d
+      md5: e7d412211d12d2abd5a744e46f0ff19f
       size: 64

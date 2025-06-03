@@ -10,14 +10,11 @@ import os
 RANDOM_STATE = 42
 
 
-def read_data(data_path):
-    X_test = pd.read_csv(os.path.join(data_path, 'X_test_scaled.csv'))
+def read_train_data(data_path):
     X_train = pd.read_csv(os.path.join(data_path, 'X_train_scaled.csv'))
-    y_test = pd.read_csv(os.path.join(data_path, 'y_test.csv'))
     y_train = pd.read_csv(os.path.join(data_path, 'y_train.csv'))
 
-    return X_train, X_test, y_train, y_test
-
+    return X_train, y_train
 
 def train_model(best_params, X_train, y_train):
     # create model
@@ -35,7 +32,7 @@ def main():
     best_params = joblib.load(best_params_path)
     
     # load data
-    X_train, X_test, y_train, y_test = read_data(data_path)
+    X_train, y_train = read_train_data(data_path)
     
     # train model with best parameters
     model = train_model(best_params, X_train, y_train)

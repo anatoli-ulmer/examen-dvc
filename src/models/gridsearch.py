@@ -12,9 +12,7 @@ RANDOM_STATE = 42
 
 
 def read_train_data(data_path):
-    # X_test = pd.read_csv(os.path.join(data_path, 'X_test_scaled.csv'))
     X_train = pd.read_csv(os.path.join(data_path, 'X_train_scaled.csv'))
-    # y_test = pd.read_csv(os.path.join(data_path, 'y_test.csv'))
     y_train = pd.read_csv(os.path.join(data_path, 'y_train.csv'))
 
     return X_train, y_train
