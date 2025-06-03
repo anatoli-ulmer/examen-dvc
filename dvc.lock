@@ -64,26 +64,18 @@ stages:
   gridsearch:
     cmd: python src/models/gridsearch.py
     deps:
-    - path: data/processed/X_test_scaled.csv
-      hash: md5
-      md5: 28af5cf6680e5aa9a5a2c92143c3d77e
-      size: 55866
     - path: data/processed/X_train_scaled.csv
       hash: md5
       md5: c31e10c6bd74233879ba71cdf3a64c83
       size: 222224
-    - path: data/processed/y_test.csv
-      hash: md5
-      md5: a051d29629c8bbb4cfb7e85c7f0315da
-      size: 6456
     - path: data/processed/y_train.csv
       hash: md5
       md5: a9cd9d91da89f732843d72548f64ded3
       size: 25951
     - path: src/models/gridsearch.py
       hash: md5
-      md5: 1f59a6f9a29ccc5e4c31eaa8d341bcf7
-      size: 1879
+      md5: 7db98ae0b21d53cfe6b3b574abc6398e
+      size: 1641
     params:
       params.yaml:
         gridsearch.learning_rate:

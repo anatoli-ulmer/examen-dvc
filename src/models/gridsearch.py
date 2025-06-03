@@ -11,13 +11,13 @@ import yaml
 RANDOM_STATE = 42
 
 
-def read_data(data_path):
-    X_test = pd.read_csv(os.path.join(data_path, 'X_test_scaled.csv'))
+def read_train_data(data_path):
+    # X_test = pd.read_csv(os.path.join(data_path, 'X_test_scaled.csv'))
     X_train = pd.read_csv(os.path.join(data_path, 'X_train_scaled.csv'))
-    y_test = pd.read_csv(os.path.join(data_path, 'y_test.csv'))
+    # y_test = pd.read_csv(os.path.join(data_path, 'y_test.csv'))
     y_train = pd.read_csv(os.path.join(data_path, 'y_train.csv'))
 
-    return X_train, X_test, y_train, y_test
+    return X_train, y_train
 
 
 def run_grid_search(param_grid, X_train, y_train):
@@ -42,7 +42,7 @@ def run_grid_search(param_grid, X_train, y_train):
 def main():
     data_path = "data/processed"
     
-    X_train, X_test, y_train, y_test = read_data(data_path)
+    X_train, y_train = read_train_data(data_path)
     
     # read parameter space
     with open("params.yaml", "r") as f:
@@ -53,13 +53,6 @@ def main():
     grid_search = run_grid_search(param_grid, X_train, y_train)
     
     print("Best params:", grid_search.best_params_)
-    best_model = grid_search.best_estimator_
-
-    y_pred = best_model.predict(X_test)
-    mse = mean_squared_error(y_test, y_pred)
-    r2 = r2_score(y_test, y_pred)
-    print(f"MSE: {mse:.4f}")
-    print(f"R^2: {r2:.4f}")
     
     # save best parameters to file
     joblib.dump(grid_search.best_params_, 'models/best_params.pkl')
